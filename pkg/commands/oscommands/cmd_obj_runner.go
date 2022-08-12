@@ -24,6 +24,7 @@ const (
 	Password CredentialType = iota
 	Username
 	Passphrase
+  Pin
 )
 
 type cmdObjRunner struct {
@@ -287,6 +288,7 @@ func (self *cmdObjRunner) getCheckForCredentialRequestFunc() func([]byte) (Crede
 			`Password\s*for\s*'.+':`:                 Password,
 			`Username\s*for\s*'.+':`:                 Username,
 			`Enter\s*passphrase\s*for\s*key\s*'.+':`: Passphrase,
+      `Enter\s*PIN\s*for\s*.+:`:                Pin,
 		}
 
 		for pattern, askFor := range prompts {
@@ -299,3 +301,4 @@ func (self *cmdObjRunner) getCheckForCredentialRequestFunc() func([]byte) (Crede
 		return 0, false
 	}
 }
+
